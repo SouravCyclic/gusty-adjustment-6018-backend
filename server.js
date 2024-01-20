@@ -1,3 +1,4 @@
+console.log = function () { };
 const express = require("express");
 const app = express();
 const ip = require('ip')
@@ -13,11 +14,13 @@ const { errorHandler } = require("./middlewares/errorHandle.middleware");
 const { adminRouter } = require("./routes/admin.routes");
 const { orderRouter } = require("./routes/payment.routes");
 const { roleRouter } = require("./routes/roles.routes");
-const { cartRouter } = require("./routes/cart.model");
+const { cartRouter } = require("./routes/cart.routes");
 
 require("dotenv").config();
 
 const PORT = process.env.PORT;
+
+
 
 // Middlewares
 app.use(cors());
