@@ -1,4 +1,4 @@
-console.log = function () { };
+
 const express = require("express");
 const app = express();
 const ip = require('ip')
@@ -40,9 +40,11 @@ app.use("/api/role", roleRouter);
 
 // Server
 app.listen(PORT, async () => {
+  console.log("Mogno Atlas Connected");
+
   try {
     await connection;
-    console.log("Mogno Atlas Connected");
+    // console.log("Mogno Atlas Connected");
     console.log("Server is running at port number", PORT);
   } catch (error) {
     console.log("Mongo connection error");

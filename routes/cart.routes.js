@@ -26,15 +26,17 @@ cartRouter.post('/addCart', authMiddleware, async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
         const productExists = await ProductsModel.findById(productId);
+        
         console.log("rpdocyExi789-", productExists)
         if (!productExists) {
             return res.status(404).json({ message: "Product not found" });
         }
+
         let cartCheck = await CartModel.findOne({ userID, productId })
+
         if (cartCheck) {
             cartCheck.quantity += quantity;
         } else {
-            // If the entry doesn't exist, create a new one
             cartCheck = new CartModel({
                 userID,
                 productId,
@@ -179,13 +181,14 @@ cartRouter.delete('/remove/:id', authMiddleware, async (req, res) => {
 
         // Check if the product is already in the cart
         const existingCartItem = await CartModel.findOne({ userID, productId });
+        console.log("exisitnItem", existingCartItem)
 
         if (!existingCartItem) {
             return res.status(404).json({ message: 'Product not found in the cart' });
         }
 
         // Increment the quantity
-        const removeAction = await CartModel.findByIdAndRemove(existingCartItem._id);
+        const removeAction = await CartModel.findByIdAndDelete(existingCartItem._id);
 
         console.log("removeAction", removeAction)
 
